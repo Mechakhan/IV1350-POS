@@ -38,12 +38,21 @@ public class Controller {
 		return sale.addItemGroup (identifier, quantity);
 	}
 	
+	/**
+	 * Method called when all items have been entered.
+	 * @return the total price, including VAT.
+	 */
 	public PriceDTO endSale() {
 		return sale.getSaleLog().getRunningTotal();
 	}
 	
-	/*public double enterCustomerID (String identifier) {
-		CustomerDTO customer = new CustomerDTO (identifier);
-		return new DiscountHandler().findDiscount(customer, sale);
-	}*/
+	/**
+	 * Enter a customer's ID to check if they're eligible for discounts.
+	 * 
+	 * @param identifier the identifier of the customer
+	 * @return the new running total after discounts have been applied.
+	 */
+	public PriceDTO enterCustomerID (String identifier) {
+		return new DiscountHandler().findDiscount(new CustomerDTO(identifier), sale.getSaleLog());
+	}
 }

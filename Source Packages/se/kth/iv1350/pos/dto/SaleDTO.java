@@ -52,6 +52,14 @@ public class SaleDTO {
 	}
 	
 	/**
+	 * Set method that updates the running total to a deep copy of the new running total object.
+	 * @param runningTotal the new running total
+	 */
+	public void setRunningTotal(PriceDTO runningTotal){
+		this.runningTotal = new PriceDTO(runningTotal.getPrice(), runningTotal.getVAT());
+	}
+	
+	/**
 	 * Returns the instance represented as a <code>String</code>.
 	 */
 	@Override
