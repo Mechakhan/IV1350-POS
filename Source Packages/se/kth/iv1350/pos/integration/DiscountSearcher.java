@@ -3,6 +3,7 @@ package se.kth.iv1350.pos.integration;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.kth.iv1350.pos.dto.AmountDTO;
 import se.kth.iv1350.pos.dto.CustomerDTO;
 import se.kth.iv1350.pos.dto.DiscountConditionDTO;
 import se.kth.iv1350.pos.dto.DiscountDTO;
@@ -23,13 +24,13 @@ public class DiscountSearcher {
 		discountDatabase = new DiscountDTO[3];
 		discountDatabase[0] = new DiscountDTO (DiscountType.TOTAL_PRICE_REDUCE, new DiscountConditionDTO
 				(new CustomerDTO("1234"), new PriceDTO(200, 0), 5, new ItemGroupDTO("ABC123", 
-						new PriceDTO(30.0, 0.25), 0, new ItemDescriptionDTO())), 20, 1);
+						new AmountDTO(30.0, 0.25), 0, new ItemDescriptionDTO())), 20, 1);
 		discountDatabase[1] = new DiscountDTO (DiscountType.TOTAL_PRICE_MODIFIER, new DiscountConditionDTO
 				(new CustomerDTO("1234"), new PriceDTO(300, 0), 6, new ItemGroupDTO("ABC123", 
-						new PriceDTO(30.0, 0.25), 0, new ItemDescriptionDTO())), 0, 0.9);
+						new AmountDTO(30.0, 0.25), 0, new ItemDescriptionDTO())), 0, 0.9);
 		discountDatabase[2] = new DiscountDTO (DiscountType.ITEM_PRICE_MODIFIER, new DiscountConditionDTO
 				(new CustomerDTO("1234"), new PriceDTO(100, 0), 4, new ItemGroupDTO("DEF456", 
-						new PriceDTO(49.0, 0.12), 0, new ItemDescriptionDTO())), 0, 0.8);
+						new AmountDTO(49.0, 0.12), 0, new ItemDescriptionDTO())), 0, 0.8);
 	}
 	
 	/**

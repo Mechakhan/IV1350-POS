@@ -6,9 +6,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import se.kth.iv1350.pos.dto.AmountDTO;
 import se.kth.iv1350.pos.dto.ItemDescriptionDTO;
 import se.kth.iv1350.pos.dto.ItemGroupDTO;
-import se.kth.iv1350.pos.dto.PriceDTO;
 
 class ItemGroupTest {
 	
@@ -17,7 +17,7 @@ class ItemGroupTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		itemDTO = new ItemGroupDTO("DEF456", new PriceDTO(49.0, 0.12), 3, new ItemDescriptionDTO());
+		itemDTO = new ItemGroupDTO("DEF456", new AmountDTO(49.0, 0.12), 3, new ItemDescriptionDTO());
 		itemGroup = new ItemGroup(itemDTO);
 	}
 

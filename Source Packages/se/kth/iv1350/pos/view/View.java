@@ -1,7 +1,6 @@
 package se.kth.iv1350.pos.view;
 
 import se.kth.iv1350.pos.controller.Controller;
-import se.kth.iv1350.pos.dto.CustomerDTO;
 import se.kth.iv1350.pos.dto.PriceDTO;
 import se.kth.iv1350.pos.dto.SaleDTO;
 
@@ -43,7 +42,7 @@ public class View {
 		System.out.println(currentSale.toString());
 		
 		PriceDTO totalPrice = controller.endSale();
-		System.out.println("-----\nTotal Price: "+ totalPrice);
+		System.out.println("-----\nTotal Price: " + totalPrice);
 		// Anropa en metod "retrieveRunningTotal" i controller här? Dålig sammanhållning?
 		// System.out.println(saleDTO.getIdentifier() + " " + saleDTO.getPrice());	
 	}

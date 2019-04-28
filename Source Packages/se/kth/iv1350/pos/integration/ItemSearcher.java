@@ -1,8 +1,8 @@
 package se.kth.iv1350.pos.integration;
 
+import se.kth.iv1350.pos.dto.AmountDTO;
 import se.kth.iv1350.pos.dto.ItemDescriptionDTO;
 import se.kth.iv1350.pos.dto.ItemGroupDTO;
-import se.kth.iv1350.pos.dto.PriceDTO;
 
 public class ItemSearcher {
 	
@@ -10,9 +10,9 @@ public class ItemSearcher {
 	
 	public ItemSearcher(){
 		itemDatabase = new ItemGroupDTO[3];
-		itemDatabase[0] = new ItemGroupDTO("ABC123", new PriceDTO(30.0, 0.25), 0, new ItemDescriptionDTO());
-		itemDatabase[1] = new ItemGroupDTO("DEF456", new PriceDTO(49.0, 0.12), 0, new ItemDescriptionDTO());
-		itemDatabase[2] = new ItemGroupDTO("GHI789", new PriceDTO(12.0, 0.06), 0, new ItemDescriptionDTO());
+		itemDatabase[0] = new ItemGroupDTO("ABC123", new AmountDTO(30.0, 0.25), 0, new ItemDescriptionDTO());
+		itemDatabase[1] = new ItemGroupDTO("DEF456", new AmountDTO(49.0, 0.12), 0, new ItemDescriptionDTO());
+		itemDatabase[2] = new ItemGroupDTO("GHI789", new AmountDTO(12.0, 0.06), 0, new ItemDescriptionDTO());
 	}
 	
 	/**

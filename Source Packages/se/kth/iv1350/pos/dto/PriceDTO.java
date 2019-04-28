@@ -1,7 +1,7 @@
 package se.kth.iv1350.pos.dto;
 
 /**
- * A DTO class containing information about the costs of item groups or the entire sale.
+ * A DTO class containing information about the running total of the entire sale.
  * @author William
  *
  */
@@ -23,7 +23,7 @@ public class PriceDTO {
 	 * @param price represents an amount of money
 	 * @param vat represents the VAT rate of the amount.
 	 */
-	public PriceDTO(double price, double vat) {
+	public PriceDTO (double price, double vat) {
 		if (price >= 0)
 			this.price = price;
 		else
@@ -33,9 +33,9 @@ public class PriceDTO {
 		else
 			this.vat = 0;
 	}
-	
+
 	/**
-	 * Get method that retrieves the price attribute of the instance.
+	 * Get method that retrieves the price of the sale, including VAT.
 	 * @return the price attribute.
 	 */
 	public double getPrice() {
@@ -43,7 +43,7 @@ public class PriceDTO {
 	}
 	
 	/**
-	 * Get method that retrieves the VAT attribute of the instance.
+	 * Get method that retrieves the how much of the price consists of VAT.
 	 * @return the VAT attribute.
 	 */
 	public double getVAT() {
@@ -51,7 +51,7 @@ public class PriceDTO {
 	}
 	
 	/**
-	 * Set method that updates the price attribute.
+	 * Set method that updates the price attribute, which cannot be negative.
 	 * @param quantity the new price.
 	 */
 	public void setPrice(double price) {
@@ -61,7 +61,7 @@ public class PriceDTO {
 	}
 	
 	/**
-	 * Set method that updates the VAT attribute.
+	 * Set method that updates the VAT attribute, which cannot be negative.
 	 * @param quantity the new VAT.
 	 */
 	public void setVAT(double vat) {
@@ -70,9 +70,6 @@ public class PriceDTO {
 		this.vat = vat;
 	}
 	
-	/**
-	 * Returns the instance represented as a <code>String</code>.
-	 */
 	@Override
 	public String toString() {
 		return price + " | VAT: " + vat;

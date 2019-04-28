@@ -9,7 +9,7 @@ package se.kth.iv1350.pos.dto;
 public class ItemGroupDTO {
 	
 	String identifier;
-	PriceDTO price;
+	AmountDTO price;
 	int quantity;
 	ItemDescriptionDTO description;
 	
@@ -22,7 +22,7 @@ public class ItemGroupDTO {
 	 * @param quantity the quantity of the item(s).
 	 * @param description the description of the item(s).
 	 */
-	public ItemGroupDTO (String identifier, PriceDTO price, int quantity, ItemDescriptionDTO description) {
+	public ItemGroupDTO (String identifier, AmountDTO price, int quantity, ItemDescriptionDTO description) {
 		this.identifier = identifier;
 		this.price = price;
 		if (quantity >= 0)
@@ -71,8 +71,8 @@ public class ItemGroupDTO {
 	 * Get method that retrieves a deep copy of the item price.
 	 * @return the item price and vat.
 	 */
-	public PriceDTO getPrice() {
-		return new PriceDTO(price.getPrice(), price.getVAT());
+	public AmountDTO getPrice() {
+		return new AmountDTO(price.getPrice(), price.getVAT());
 	}
 	
 	/**

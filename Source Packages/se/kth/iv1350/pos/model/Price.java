@@ -1,5 +1,6 @@
 package se.kth.iv1350.pos.model;
 
+import se.kth.iv1350.pos.dto.AmountDTO;
 import se.kth.iv1350.pos.dto.DiscountDTO;
 import se.kth.iv1350.pos.dto.ItemGroupDTO;
 import se.kth.iv1350.pos.dto.PriceDTO;
@@ -41,7 +42,7 @@ public class Price {
 	}
 	
 	private double calculateAmount (ItemGroupDTO itemGroup, int vatPercentage) {
-		PriceDTO priceOfItem = itemGroup.getPrice();
+		AmountDTO priceOfItem = itemGroup.getPrice();
 		return priceOfItem.getPrice() * (vatPercentage + priceOfItem.getVAT()) * itemGroup.getQuantity();
 	}
 	
