@@ -42,7 +42,10 @@ public class View {
 		System.out.println(currentSale.toString());
 		
 		PriceDTO totalPrice = controller.endSale();
-		System.out.println("-----\nTotal Price: " + totalPrice);
+		System.out.println("-----\nTotal Price: " + totalPrice + "\n");
+		
+		totalPrice = controller.enterCustomerID("1234");
+		System.out.println("-----\nTotal Price: " + totalPrice + "\n");
 		// Anropa en metod "retrieveRunningTotal" i controller här? Dålig sammanhållning?
 		// System.out.println(saleDTO.getIdentifier() + " " + saleDTO.getPrice());	
 	}

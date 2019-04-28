@@ -5,7 +5,6 @@ public class DiscountConditionDTO {
 	private CustomerDTO applicableCustomer;
 	private PriceDTO applicableSalePrice;
 	private int applicableNrOfItemsInSale;
-	private ItemGroupDTO applicableItem;
 	
 	/**
 	 * Creates new instance.
@@ -16,12 +15,10 @@ public class DiscountConditionDTO {
 	 * @param applicableItem the item that the discount is applicable to.
 	 */
 	public DiscountConditionDTO (CustomerDTO applicableCustomer, 
-			PriceDTO applicableSalePrice, int applicableNrOfItemsInSale, 
-			ItemGroupDTO applicableItem) {
+			PriceDTO applicableSalePrice, int applicableNrOfItemsInSale) {
 		this.applicableCustomer = applicableCustomer;
 		this.applicableSalePrice = applicableSalePrice;
 		this.applicableNrOfItemsInSale = applicableNrOfItemsInSale;
-		this.applicableItem = applicableItem;
 	}
 
 	/**
@@ -32,7 +29,6 @@ public class DiscountConditionDTO {
 		this.applicableCustomer = conditions.getCustomer();
 		this.applicableSalePrice = conditions.getSalePrice();
 		this.applicableNrOfItemsInSale = conditions.getNrOfItemsInSale();
-		this.applicableItem = conditions.getItem();
 	}
 
 	/**
@@ -57,13 +53,5 @@ public class DiscountConditionDTO {
 	 */
 	public int getNrOfItemsInSale() {
 		return applicableNrOfItemsInSale;
-	}
-	
-	/**
-	 * Get method that retrieves the applicable item of the discount.
-	 * @return the applicable item.
-	 */
-	public ItemGroupDTO getItem() {
-		return new ItemGroupDTO(applicableItem);
 	}
 }

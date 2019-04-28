@@ -20,7 +20,7 @@ public class DiscountDTO {
 	public DiscountDTO (DiscountType type, DiscountConditionDTO conditions, double reduceConstant, double reduceModifier) {
 		this.type = type;
 		this.conditions = new DiscountConditionDTO (conditions);
-		if (reduceConstant < 0 || reduceConstant >= conditions.getItem().getPrice().getPrice())
+		if (reduceConstant < 0)
 			reduceConstant = 0;
 		this.reduceConstant = reduceConstant;
 		if (reduceModifier <= 0 || reduceModifier > 1)
