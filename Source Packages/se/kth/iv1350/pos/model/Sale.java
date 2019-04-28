@@ -2,7 +2,6 @@ package se.kth.iv1350.pos.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import se.kth.iv1350.pos.dto.DiscountDTO;
 import se.kth.iv1350.pos.dto.ItemGroupDTO;
 import se.kth.iv1350.pos.dto.PriceDTO;
 import se.kth.iv1350.pos.dto.SaleDTO;
@@ -76,12 +75,21 @@ public class Sale {
 	public SaleDTO getSaleLog() {
 		return new SaleDTO(saleLog.getSaleItems(), saleLog.getRunningTotal());
 	}
-	
-	public void reduceFinalPrice(DiscountDTO[] discounts) {
-		price.reduceFinalPrice (discounts);
+
+	/**
+	 * Ends the current sale and returns 
+	 * @return
+	 */
+	public PriceDTO end() {
+		price.setRunningTotalActive(false);
+		return saleLog.getRunningTotal();
 	}
-	
-	/*public double getFinalPrice() {
-		return price.getRunningTotal();
-	}*/
+
+	/**
+	 * Set method that updates the running total attribute.
+	 * @param runningTotal the new running total.
+	 */
+	public void setRunningTotal(PriceDTO runningTotal) {
+		price.setRunningTotal(runningTotal);
+	}
 }

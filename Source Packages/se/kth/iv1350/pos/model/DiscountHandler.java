@@ -3,7 +3,6 @@ package se.kth.iv1350.pos.model;
 import se.kth.iv1350.pos.dto.CustomerDTO;
 import se.kth.iv1350.pos.dto.DiscountDTO;
 import se.kth.iv1350.pos.dto.PriceDTO;
-import se.kth.iv1350.pos.dto.SaleDTO;
 import se.kth.iv1350.pos.integration.DiscountSearcher;
 
 public class DiscountHandler {
@@ -20,9 +19,9 @@ public class DiscountHandler {
 	 * @param sale the sale containing the items the customer has bought
 	 * @return the new running total after discounts have been applied.
 	 */
-	public PriceDTO findDiscount (CustomerDTO customer, SaleDTO sale) {
-		DiscountDTO[] eligibleDiscounts = new DiscountSearcher().getEligibleDiscounts(customer, sale);
-		PriceDTO runningTotal = sale.getRunningTotal();
+	public PriceDTO findDiscount (CustomerDTO customer, Sale sale) {
+		DiscountDTO[] eligibleDiscounts = new DiscountSearcher().getEligibleDiscounts(customer, sale.getSaleLog());
+		PriceDTO runningTotal = sale.getSaleLog().getRunningTotal();
 		for (DiscountDTO discount : eligibleDiscounts) {
 			switch (discount.getType()) {
 			case TOTAL_PRICE_REDUCE:

@@ -19,6 +19,7 @@ public class SaleDTO {
 	 * 
 	 * @param itemGroups the items that have been added to the Sale.
 	 * @param runningTotal the current running total of all items in the Sale, including vat.
+	 * @param active indicates if the sale is active or has ended.
 	 */
 	public SaleDTO(List<ItemGroupDTO> saleItems, PriceDTO runningTotal) {
 		this.saleItems = saleItems;
@@ -44,7 +45,7 @@ public class SaleDTO {
 	 * @return a deep copy of the running total, including vat.
 	 */
 	public PriceDTO getRunningTotal(){
-		return new PriceDTO(runningTotal.getPrice(), runningTotal.getVAT());
+		return new PriceDTO(runningTotal.getPrice(), runningTotal.getVAT(), runningTotal.getActive());
 	}
 	
 	/**
@@ -69,15 +70,15 @@ public class SaleDTO {
 	 * @param runningTotal the new running total
 	 */
 	public void setRunningTotal(PriceDTO runningTotal){
-		this.runningTotal = new PriceDTO(runningTotal.getPrice(), runningTotal.getVAT());
+		this.runningTotal = new PriceDTO(runningTotal.getPrice(), runningTotal.getVAT(), runningTotal.getActive());
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder("-----\nItems:\n");
 		for (ItemGroupDTO itemGroup : saleItems)
-			builder.append(itemGroup.toString() + "\n");
-		builder.append("-----\n\nRunning total: " + runningTotal.toString() + "\n");
+			builder.append(itemGroup + "\n");
+		builder.append(runningTotal);
 		return builder.toString();
 	}
 }

@@ -29,7 +29,7 @@ class DiscountHandlerTest {
 	void testNoDiscount() {
 		sale.addItemGroup("ABC123", 10);
 		sale.addItemGroup("DEF456", 1);
-		double newPrice = dh.findDiscount(new CustomerDTO("0123"), sale.getSaleLog()).getPrice();
+		double newPrice = dh.findDiscount(new CustomerDTO("0123"), sale).getPrice();
 		double expResult = 30 * 1.25 * 10 + 49 * 1.12 * 1;
 		assertEquals(expResult, newPrice, "Price changed without a discount.");
 	}
@@ -38,7 +38,7 @@ class DiscountHandlerTest {
 	void testOneDiscount() {
 		sale.addItemGroup("ABC123", 5);
 		sale.addItemGroup("GHI789", 3);
-		double newPrice = dh.findDiscount(new CustomerDTO("1234"), sale.getSaleLog()).getPrice();
+		double newPrice = dh.findDiscount(new CustomerDTO("1234"), sale).getPrice();
 		double expResult = 30 * 1.25 * 5 + 12 * 1.06 * 3 - 20;
 		assertEquals(expResult, newPrice, "Price after one discount is incorrect.");
 	}
@@ -46,7 +46,7 @@ class DiscountHandlerTest {
 	@Test
 	void testThreeDiscount() {
 		sale.addItemGroup("DEF456", 10);
-		double newPrice = dh.findDiscount(new CustomerDTO("1234"), sale.getSaleLog()).getPrice();
+		double newPrice = dh.findDiscount(new CustomerDTO("1234"), sale).getPrice();
 		double expResult = (49 * 1.12 * 10 - 20) * .9 * .8;
 		assertEquals(expResult, newPrice, "Price after three discounts is incorrect.");
 	}

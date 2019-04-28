@@ -8,10 +8,10 @@ package se.kth.iv1350.pos.dto;
  */
 public class ItemGroupDTO {
 	
-	String identifier;
-	AmountDTO price;
-	int quantity;
-	ItemDescriptionDTO description;
+	private String identifier;
+	private AmountDTO price;
+	private int quantity;
+	private ItemDescriptionDTO description;
 	
 	/**
 	 * Creates new instance.
@@ -101,7 +101,7 @@ public class ItemGroupDTO {
 	
 	@Override
 	public String toString() {
-		return "ID: " + identifier + " | cost: " + price.toString() + " | x " + quantity;
+		return description + " | ID: " + identifier + " | cost: " + price + " | x" + quantity;
 	}
 	
 	@Override

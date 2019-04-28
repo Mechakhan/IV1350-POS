@@ -1,6 +1,7 @@
 package se.kth.iv1350.pos.view;
 
 import se.kth.iv1350.pos.controller.Controller;
+import se.kth.iv1350.pos.dto.MoneyDTO;
 import se.kth.iv1350.pos.dto.PriceDTO;
 import se.kth.iv1350.pos.dto.SaleDTO;
 
@@ -42,14 +43,12 @@ public class View {
 		System.out.println(currentSale.toString());
 		
 		PriceDTO totalPrice = controller.endSale();
-		System.out.println("-----\nTotal Price: " + totalPrice + "\n");
+		System.out.println(totalPrice + "\n");
 		
 		totalPrice = controller.enterCustomerID("1234");
-		System.out.println("-----\nTotal Price: " + totalPrice + "\n");
-		// Anropa en metod "retrieveRunningTotal" i controller här? Dålig sammanhållning?
-		// System.out.println(saleDTO.getIdentifier() + " " + saleDTO.getPrice());	
+		System.out.println(totalPrice + "\n");
+		
+		MoneyDTO change = controller.enterPayment(new MoneyDTO(totalPrice.getPrice() + 42));
+		System.out.println("-----\nChange: " + change);
 	}
-	
-	// En javadoc kommentar per publik deklaration, om fler behövs: dålig sammanhållning
-	// Många privata metoder vid krångliga kodformuleringar.
 }

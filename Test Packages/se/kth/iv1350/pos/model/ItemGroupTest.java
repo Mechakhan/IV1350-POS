@@ -17,7 +17,7 @@ class ItemGroupTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		itemDTO = new ItemGroupDTO("DEF456", new AmountDTO(49.0, 0.12), 3, new ItemDescriptionDTO());
+		itemDTO = new ItemGroupDTO("DEF456", new AmountDTO(49.0, 0.12), 3, new ItemDescriptionDTO(""));
 		itemGroup = new ItemGroup(itemDTO);
 	}
 

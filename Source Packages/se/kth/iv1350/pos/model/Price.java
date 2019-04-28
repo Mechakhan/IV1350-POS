@@ -1,7 +1,6 @@
 package se.kth.iv1350.pos.model;
 
 import se.kth.iv1350.pos.dto.AmountDTO;
-import se.kth.iv1350.pos.dto.DiscountDTO;
 import se.kth.iv1350.pos.dto.ItemGroupDTO;
 import se.kth.iv1350.pos.dto.PriceDTO;
 
@@ -12,7 +11,7 @@ import se.kth.iv1350.pos.dto.PriceDTO;
  */
 public class Price {
 	
-	PriceDTO runningTotal;
+	private PriceDTO runningTotal;
 	
 	/**
 	 * Creates new instance.
@@ -46,7 +45,19 @@ public class Price {
 		return priceOfItem.getPrice() * (vatPercentage + priceOfItem.getVAT()) * itemGroup.getQuantity();
 	}
 	
-	public void reduceFinalPrice (DiscountDTO[] discounts) {
-		// Gör något baserat på discount vektorn här...
+	/**
+	 * Set method that changes whether the running total is active.
+	 * @param active indicates the state of the running total.
+	 */
+	public void setRunningTotalActive(boolean active) {
+		runningTotal.setActive(active);
+	}
+
+	/**
+	 * Set method that updates the running total attribute.
+	 * @param runningTotal the new running total.
+	 */
+	public void setRunningTotal(PriceDTO runningTotal) {
+		this.runningTotal.setPrice(runningTotal.getPrice());
 	}
 }

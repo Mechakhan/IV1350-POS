@@ -9,7 +9,7 @@ import se.kth.iv1350.pos.dto.ItemGroupDTO;
  */
 public class ItemGroup {
 
-	ItemGroupDTO itemGroup;
+	private ItemGroupDTO itemGroup;
 	
 	/**
 	 * Creates new instance.

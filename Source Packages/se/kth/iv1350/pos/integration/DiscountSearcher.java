@@ -12,7 +12,7 @@ import se.kth.iv1350.pos.enumerables.DiscountType;
 
 public class DiscountSearcher {
 	
-	DiscountDTO[] discountDatabase;
+	private DiscountDTO[] discountDatabase;
 	
 	/**
 	 * Creates new instance.
@@ -20,11 +20,11 @@ public class DiscountSearcher {
 	public DiscountSearcher() {
 		discountDatabase = new DiscountDTO[3];
 		discountDatabase[0] = new DiscountDTO (DiscountType.TOTAL_PRICE_REDUCE, new DiscountConditionDTO
-				(new CustomerDTO("1234"), new PriceDTO(200, 0), 5), 20, 1);
+				(new CustomerDTO("1234"), new PriceDTO(200, 0, false), 5), 20, 1);
 		discountDatabase[1] = new DiscountDTO (DiscountType.TOTAL_PRICE_MODIFIER, new DiscountConditionDTO
-				(new CustomerDTO("1234"), new PriceDTO(300, 0), 6), 0, 0.9);
+				(new CustomerDTO("1234"), new PriceDTO(300, 0, false), 6), 0, 0.9);
 		discountDatabase[2] = new DiscountDTO (DiscountType.TOTAL_PRICE_MODIFIER, new DiscountConditionDTO
-				(new CustomerDTO("1234"), new PriceDTO(150, 0), 10), 0, 0.8);
+				(new CustomerDTO("1234"), new PriceDTO(150, 0, false), 10), 0, 0.8);
 	}
 	
 	/**

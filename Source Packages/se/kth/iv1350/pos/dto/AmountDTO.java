@@ -7,8 +7,8 @@ package se.kth.iv1350.pos.dto;
  */
 public class AmountDTO {
 
-	double price;
-	double vat;
+	private double price;
+	private double vat;
 	
 	/**
 	 * Creates new instance.

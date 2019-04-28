@@ -21,7 +21,7 @@ class PriceTest {
 	void setUp() throws Exception {
 		priceDTO = new PriceDTO();
 		price = new Price(priceDTO);
-		item = new ItemGroupDTO("ABC123", new AmountDTO(30.0, 0.25), 3, new ItemDescriptionDTO());
+		item = new ItemGroupDTO("ABC123", new AmountDTO(30.0, 0.25), 3, new ItemDescriptionDTO(""));
 	}
 
 	@AfterEach

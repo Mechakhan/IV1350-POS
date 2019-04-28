@@ -44,7 +44,7 @@ public class DiscountConditionDTO {
 	 * @return the applicable sale price.
 	 */
 	public PriceDTO getSalePrice() {
-		return new PriceDTO(applicableSalePrice.getPrice(), applicableSalePrice.getVAT());
+		return new PriceDTO(applicableSalePrice.getPrice(), applicableSalePrice.getVAT(), applicableSalePrice.getActive());
 	}
 	
 	/**

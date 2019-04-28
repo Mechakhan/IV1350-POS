@@ -7,8 +7,9 @@ package se.kth.iv1350.pos.dto;
  */
 public class PriceDTO {
 	
-	double price;
-	double vat;
+	private double price;
+	private double vat;
+	private boolean active;
 	
 	/**
 	 * Creates new instance with default attributes.
@@ -16,6 +17,7 @@ public class PriceDTO {
 	public PriceDTO() {
 		price = 0;
 		vat = 0;
+		active = true;
 	}
 	
 	/**
@@ -23,7 +25,7 @@ public class PriceDTO {
 	 * @param price represents an amount of money
 	 * @param vat represents the VAT rate of the amount.
 	 */
-	public PriceDTO (double price, double vat) {
+	public PriceDTO (double price, double vat, boolean active) {
 		if (price >= 0)
 			this.price = price;
 		else
@@ -32,6 +34,7 @@ public class PriceDTO {
 			this.vat = vat;
 		else
 			this.vat = 0;
+		this.active = active;
 	}
 
 	/**
@@ -74,6 +77,24 @@ public class PriceDTO {
 	
 	@Override
 	public String toString() {
-		return price + " | VAT: " + vat;
+		StringBuilder builder = new StringBuilder("-----\n\n");
+		if (active)
+			builder.append("Running total: ");
+		else
+			builder.append("Total price: ");
+		builder.append(price + " | VAT: " + vat);
+		return builder.toString();
+	}
+
+	/**
+	 * Set method that changes whether the running total is active.
+	 * @param active indicates the state of the running total.
+	 */
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public boolean getActive() {
+		return active;
 	}
 }
