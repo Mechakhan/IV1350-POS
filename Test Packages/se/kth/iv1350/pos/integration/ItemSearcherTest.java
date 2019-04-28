@@ -4,10 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import se.kth.iv1350.pos.dto.ItemDescriptionDTO;
 import se.kth.iv1350.pos.dto.ItemGroupDTO;
-import se.kth.iv1350.pos.dto.PriceDTO;
 
 class ItemSearcherTest {
 	

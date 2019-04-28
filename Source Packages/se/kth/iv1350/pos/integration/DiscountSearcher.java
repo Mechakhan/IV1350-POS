@@ -25,11 +25,11 @@ public class DiscountSearcher {
 				(new CustomerDTO("1234"), new PriceDTO(200, 0), 5, new ItemGroupDTO("ABC123", 
 						new PriceDTO(30.0, 0.25), 0, new ItemDescriptionDTO())), 20, 1);
 		discountDatabase[1] = new DiscountDTO (DiscountType.TOTAL_PRICE_MODIFIER, new DiscountConditionDTO
-				(new CustomerDTO("1234"), new PriceDTO(200, 0), 5, new ItemGroupDTO("ABC123", 
-						new PriceDTO(30.0, 0.25), 0, new ItemDescriptionDTO())), 20, 1);
+				(new CustomerDTO("1234"), new PriceDTO(300, 0), 6, new ItemGroupDTO("ABC123", 
+						new PriceDTO(30.0, 0.25), 0, new ItemDescriptionDTO())), 0, 0.9);
 		discountDatabase[2] = new DiscountDTO (DiscountType.ITEM_PRICE_MODIFIER, new DiscountConditionDTO
-				(new CustomerDTO("1234"), new PriceDTO(200, 0), 5, new ItemGroupDTO("DEF456", 
-						new PriceDTO(49.0, 0.12), 0, new ItemDescriptionDTO())), 20, 1);
+				(new CustomerDTO("1234"), new PriceDTO(100, 0), 4, new ItemGroupDTO("DEF456", 
+						new PriceDTO(49.0, 0.12), 0, new ItemDescriptionDTO())), 0, 0.8);
 	}
 	
 	/**
@@ -49,8 +49,8 @@ public class DiscountSearcher {
 	}
 
 	private boolean eligibleDiscount(DiscountDTO discount, CustomerDTO customer, SaleDTO saleDTO) {
-		return discount.getConditions().getCustomer().getIdentifier().equals(customer.getIdentifier()) && 
+		return discount.getConditions().getCustomer().equals(customer) && 
 				discount.getConditions().getSalePrice().getPrice() <= saleDTO.getRunningTotal().getPrice() &&
-				discount.getConditions().getNrOfItemsInSale() <= saleDTO.getSaleItems().size();
+				discount.getConditions().getNrOfItemsInSale() <= saleDTO.getItemCount();
 	}
 }

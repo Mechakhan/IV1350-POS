@@ -10,8 +10,9 @@ import java.util.List;
  */
 public class SaleDTO {
 	
-	List<ItemGroupDTO> saleItems;
-	PriceDTO runningTotal;
+	private List<ItemGroupDTO> saleItems;
+	private PriceDTO runningTotal;
+	private int itemCount;
 	
 	/**
 	 * Creates new instance.
@@ -22,6 +23,9 @@ public class SaleDTO {
 	public SaleDTO(List<ItemGroupDTO> saleItems, PriceDTO runningTotal) {
 		this.saleItems = saleItems;
 		this.runningTotal = runningTotal;
+		itemCount = 0;
+		for (ItemGroupDTO itemGroup : saleItems)
+			itemCount += itemGroup.getQuantity();
 	}
 	
 	/**
@@ -44,11 +48,20 @@ public class SaleDTO {
 	}
 	
 	/**
+	 * Get method that retrieves the amount of items in the sale.
+	 * @return the amount of items in the sale.
+	 */
+	public int getItemCount() {
+		return itemCount;
+	}
+	
+	/**
 	 * Method that adds an item group into the list of sale items.
 	 * @param itemGroupToAdd
 	 */
 	public void addToSaleItems(ItemGroupDTO itemGroupToAdd) {
 		saleItems.add(itemGroupToAdd);
+		itemCount += itemGroupToAdd.getQuantity();
 	}
 	
 	/**
@@ -59,9 +72,6 @@ public class SaleDTO {
 		this.runningTotal = new PriceDTO(runningTotal.getPrice(), runningTotal.getVAT());
 	}
 	
-	/**
-	 * Returns the instance represented as a <code>String</code>.
-	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder("-----\nItems:\n");

@@ -99,11 +99,16 @@ public class ItemGroupDTO {
 		this.quantity = quantity;
 	}
 	
-	/**
-	 * Returns the instance represented as a <code>String</code>.
-	 */
 	@Override
 	public String toString() {
 		return "ID: " + identifier + " | cost: " + price.toString() + " | x " + quantity;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof ItemGroupDTO))
+			return false;
+		ItemGroupDTO otherItemGroup = (ItemGroupDTO)other;
+		return identifier.equals(otherItemGroup.getIdentifier());
 	}
 }

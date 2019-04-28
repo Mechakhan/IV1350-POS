@@ -19,4 +19,12 @@ public class CustomerDTO {
 	public String getIdentifier() {
 		return identifier;
 	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof CustomerDTO))
+			return false;
+		CustomerDTO otherCustomer = (CustomerDTO)other;
+		return identifier.equals(otherCustomer.getIdentifier());
+	}
 }

@@ -51,7 +51,7 @@ public class DiscountHandler {
 
 	private int discountableItemQuantity (SaleDTO sale, DiscountDTO discount) {
 		for (ItemGroupDTO itemGroup : sale.getSaleItems()) {
-			if (itemGroup.getIdentifier().equals(discount.getConditions().getItem().getIdentifier()))
+			if (itemGroup.equals(discount.getConditions().getItem()))
 				return itemGroup.getQuantity();
 		}
 		return 0;
