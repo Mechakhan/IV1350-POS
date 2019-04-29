@@ -2,6 +2,11 @@ package se.kth.iv1350.pos.dto;
 
 import se.kth.iv1350.pos.enumerables.DiscountType;
 
+/**
+ * A class representing different types of discounts.
+ * @author William
+ *
+ */
 public class DiscountDTO {
 	
 	private DiscountType type;

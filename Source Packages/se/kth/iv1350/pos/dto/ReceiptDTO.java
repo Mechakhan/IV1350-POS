@@ -1,5 +1,10 @@
 package se.kth.iv1350.pos.dto;
 
+/**
+ * A class containing all the information to be printed on the receipt.
+ * @author William
+ *
+ */
 public class ReceiptDTO {
 
 	StoreDTO storeData;
@@ -28,7 +33,7 @@ public class ReceiptDTO {
 	
 	@Override
 	public String toString() {
-		return "-----\nReciept:\n\n" + storeData + "\n" + currentTime + 
+		return "-----\nReceipt:\n\n" + storeData + "\n" + currentTime + 
 				"\n\n" + saleInfo + "\nPayment: " + payment + " | Change: " + change;
 	}
 }

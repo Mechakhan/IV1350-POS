@@ -2,13 +2,11 @@ package se.kth.iv1350.pos.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.List;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import se.kth.iv1350.pos.dto.ItemGroupDTO;
+import se.kth.iv1350.pos.dto.PriceDTO;
 
 class SaleTest {
 	
@@ -26,31 +24,47 @@ class SaleTest {
 
 	@Test
 	void testAddNewInvalidItem() {
-		boolean isEmpty = sale.addItemGroup("GHI780", 4).getSaleItems().isEmpty();
-		assertTrue(isEmpty, "Invalid item is added to sale items.");
+		String result = sale.addItemGroup("GHI780", 4);
+		String expResult = "Attention:";
+		assertTrue(result.contains(expResult), "Invalid item is added to sale items.");
 	}
 	
 	@Test
 	void testAddNewValidItem() {
-		List<ItemGroupDTO> saleItems = sale.addItemGroup("GHI789", 4).getSaleItems();
-		double price = 0;
-		for (ItemGroupDTO itemGroup : saleItems) {
-			price = itemGroup.getPrice().getPrice();
-		}
-		double expResult = 12.0;
-		assertEquals(price, expResult, "Item not added correctly into List.");
+		String result = sale.addItemGroup("GHI789", 4);
+		String expResult = "cost: 12.0";
+		assertTrue(result.contains(expResult), "Item not added correctly into List.");
 	}
 	
 	@Test
 	void testAddExistingItem() {
 		sale.addItemGroup("ABC123", 2);
-		List<ItemGroupDTO> saleItems = sale.addItemGroup("ABC123", 4).getSaleItems();
-		int quantity = 0;
-		for (ItemGroupDTO itemGroup : saleItems) {
-			quantity = itemGroup.getQuantity();
-		}
-		double expResult = 6;
-		assertEquals(quantity, expResult, "Item not added correctly into List.");
+		String result = sale.addItemGroup("ABC123", 4);
+		String expResult = "x6";
+		assertTrue(result.contains(expResult), "Item not added correctly into List.");
 	}
 
+	@Test
+	void testAddToRunningTotal() {
+		sale.setRunningTotal(new PriceDTO(10, 0, false));
+		double runningTotal = sale.getSaleLog().getRunningTotal().getPrice();
+		double expResult = 10;
+		assertEquals(expResult, runningTotal, "Running total not updated correctly by set method.");
+	}
+	
+	@Test
+	void testAddToRunningTotalInvalid() {
+		sale.setRunningTotal(new PriceDTO(-10, 0, false));
+		double runningTotal = sale.getSaleLog().getRunningTotal().getPrice();
+		double expResult = 0;
+		assertEquals(expResult, runningTotal, "Running total not updated correctly by set method.");
+	}
+	
+	@Test
+	void testEnd() {
+		sale.setRunningTotal(new PriceDTO(42, 0, false));
+		double totalPrice = sale.end().getPrice();
+		double expResult = 42;
+		assertEquals(expResult, totalPrice, "Running total not returned correctly by end method.");
+	}
 }

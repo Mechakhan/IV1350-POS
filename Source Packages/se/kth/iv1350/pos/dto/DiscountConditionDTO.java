@@ -1,5 +1,11 @@
 package se.kth.iv1350.pos.dto;
 
+/**
+ * A class representing the conditions that have to 
+ * be met for a discount to be eligible.
+ * @author William
+ *
+ */
 public class DiscountConditionDTO {
 
 	private CustomerDTO applicableCustomer;

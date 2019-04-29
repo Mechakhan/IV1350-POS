@@ -1,7 +1,7 @@
 package se.kth.iv1350.pos.dto;
 
 /**
- * A DTO class containing information about the  amount of money an item costs.
+ * A class containing information about the amount of money an item costs.
  * @author William
  *
  */
@@ -44,6 +44,6 @@ public class AmountDTO {
 	
 	@Override
 	public String toString() {
-		return price + " | VAT: " + vat;
+		return "cost: " + price + " | VAT: " + vat;
 	}
 }

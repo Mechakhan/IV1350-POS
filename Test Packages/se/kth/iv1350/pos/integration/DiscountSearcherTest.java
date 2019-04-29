@@ -54,7 +54,7 @@ class DiscountSearcherTest {
 	void testValidForOneDiscount() {
 		sale.addItemGroup("ABC123", 1);
 		sale.addItemGroup("DEF456", 1);
-		sale.addItemGroup("GHI789", 3);
+		sale.addItemGroup("GHI789", 8);
 		int amountOfDiscounts = ds.getEligibleDiscounts(new CustomerDTO("1234"), sale.getSaleLog()).length;
 		int expResult = 1;
 		assertEquals(expResult, amountOfDiscounts, "A wrong amount of discounts was returned.");
@@ -62,8 +62,8 @@ class DiscountSearcherTest {
 	
 	@Test
 	void testValidForTwoDiscounts() {
-		sale.addItemGroup("ABC123", 2);
-		sale.addItemGroup("DEF456", 4);
+		sale.addItemGroup("ABC123", 3);
+		sale.addItemGroup("DEF456", 6);
 		int amountOfDiscounts = ds.getEligibleDiscounts(new CustomerDTO("1234"), sale.getSaleLog()).length;
 		int expResult = 2;
 		assertEquals(expResult, amountOfDiscounts, "A wrong amount of discounts was returned.");

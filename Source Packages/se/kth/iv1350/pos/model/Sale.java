@@ -23,7 +23,7 @@ public class Sale {
 	public Sale () {
 		List<ItemGroupDTO> saleItems = new ArrayList<ItemGroupDTO>();
 		PriceDTO runningTotal = new PriceDTO();
-		saleLog = new SaleDTO(saleItems, runningTotal);
+		saleLog = new SaleDTO(saleItems, runningTotal, 0);
 		price = new Price(runningTotal);
 	}
 	
@@ -35,22 +35,27 @@ public class Sale {
 	 * @param quantity the quantity of the entered item(s).
 	 * @return A SaleDTO object based on information about the current Sale is returned.
 	 */
-	public SaleDTO addItemGroup (String identifier, int quantity) {
+	public String addItemGroup (String identifier, int quantity) {
 		if (!idInList(identifier, quantity)) {
 			ItemGroupDTO foundItemGroup = new ItemSearcher().retrieveItemWithID(identifier, quantity);
 			if (foundItemGroup != null) {
-				saleLog.addToSaleItems(foundItemGroup); // Är detta logik?
+				saleLog.addToSaleItems(foundItemGroup);
+				saleLog.setItemCount(calculateItemCount());
 				updatePrice(foundItemGroup);
 			}
+			else
+			{
+				return "\nAttention: Item identifier was not found.";
+			}
 		}
-		return getSaleLog();
+		return getSaleLog().toString();
 	}
 	
 	private boolean idInList (String identifierLookedFor, int quantity) {
 		boolean idWasFound = false;
 		List<ItemGroupDTO> saleItems = saleLog.getSaleItems();
 		for (ItemGroupDTO itemGroup : saleItems) {
-			if (itemGroup.getIdentifier() == identifierLookedFor) {
+			if (itemGroup.getIdentifier().equals(identifierLookedFor)) {
 				addExistingItemToSale(itemGroup, quantity);
 				idWasFound = true;
 			}
@@ -60,7 +65,15 @@ public class Sale {
 	
 	private void addExistingItemToSale(ItemGroupDTO itemGroup, int quantityToAdd) {
 		new ItemGroup(itemGroup).addToQuantity(quantityToAdd);
+		saleLog.setItemCount(calculateItemCount());
 		updatePrice(new ItemGroupDTO(itemGroup, quantityToAdd));
+	}
+	
+	private int calculateItemCount() {
+		int count = 0;
+		for (ItemGroupDTO itemGroup : saleLog.getSaleItems())
+			count += itemGroup.getQuantity();
+		return count;
 	}
 	
 	private void updatePrice(ItemGroupDTO itemGroup) {
@@ -70,15 +83,15 @@ public class Sale {
 	
 	/**
 	 * Get method that retrieves a sale log, or a deep copy the current sale.
-	 * @return
+	 * @return the log of the current sale.
 	 */
 	public SaleDTO getSaleLog() {
-		return new SaleDTO(saleLog.getSaleItems(), saleLog.getRunningTotal());
+		return new SaleDTO(saleLog.getSaleItems(), saleLog.getRunningTotal(), saleLog.getItemCount());
 	}
 
 	/**
-	 * Ends the current sale and returns 
-	 * @return
+	 * Ends the current sale, meaning set running total to inactive, and returns the total price.
+	 * @return the total price.
 	 */
 	public PriceDTO end() {
 		price.setRunningTotalActive(false);

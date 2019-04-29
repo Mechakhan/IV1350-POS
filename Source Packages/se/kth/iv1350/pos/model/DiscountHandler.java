@@ -5,6 +5,11 @@ import se.kth.iv1350.pos.dto.DiscountDTO;
 import se.kth.iv1350.pos.dto.PriceDTO;
 import se.kth.iv1350.pos.integration.DiscountSearcher;
 
+/**
+ * Class that handles all calculations related to discounts.
+ * @author William
+ *
+ */
 public class DiscountHandler {
 	
 	/**

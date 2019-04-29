@@ -1,5 +1,11 @@
 package se.kth.iv1350.pos.dto;
 
+/**
+ * A class containing various descriptions 
+ * of items.
+ * @author William
+ *
+ */
 public class ItemDescriptionDTO {
 	
 	private String name;

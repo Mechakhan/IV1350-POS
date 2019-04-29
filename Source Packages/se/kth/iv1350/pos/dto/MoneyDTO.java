@@ -1,5 +1,10 @@
 package se.kth.iv1350.pos.dto;
 
+/**
+ * A class representing an amount of money.
+ * @author William
+ *
+ */
 public class MoneyDTO {
 
 	private double amount;

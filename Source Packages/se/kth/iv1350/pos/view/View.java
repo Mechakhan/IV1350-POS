@@ -2,8 +2,6 @@ package se.kth.iv1350.pos.view;
 
 import se.kth.iv1350.pos.controller.Controller;
 import se.kth.iv1350.pos.dto.MoneyDTO;
-import se.kth.iv1350.pos.dto.PriceDTO;
-import se.kth.iv1350.pos.dto.SaleDTO;
 
 /**
  * This program has no view, instead, this class is a
@@ -32,23 +30,15 @@ public class View {
 		controller.startNewSale();
 		System.out.println("New sale was started.");
 		
-		SaleDTO currentSale;
-		currentSale = controller.enterItemID("ABC123", 1);
-		System.out.println(currentSale.toString());
-		currentSale = controller.enterItemID("DEF456", 2);
-		System.out.println(currentSale.toString());
-		currentSale = controller.enterItemID("ÅÄÖ123", 3);
-		System.out.println(currentSale.toString());
-		currentSale = controller.enterItemID("ABC123", 3);
-		System.out.println(currentSale.toString());
+		System.out.println(controller.enterItemID("ABC123", 1) + "\n");
+		System.out.println(controller.enterItemID("DEF456", 2) + "\n");
+		System.out.println(controller.enterItemID("ÅÄÖ123", 3) + "\n");
+		System.out.println(controller.enterItemID("ABC123", 3) + "\n");
 		
-		PriceDTO totalPrice = controller.endSale();
-		System.out.println(totalPrice + "\n");
+		System.out.println(controller.endSale() + "\n");
 		
-		totalPrice = controller.enterCustomerID("1234");
-		System.out.println(totalPrice + "\n");
+		System.out.println(controller.enterCustomerID("1234") + "\n");
 		
-		MoneyDTO change = controller.enterPayment(new MoneyDTO(totalPrice.getPrice() + 42));
-		System.out.println("-----\nChange: " + change);
+		System.out.println("-----\nChange: " + controller.enterPayment(new MoneyDTO(500)) + "\n");
 	}
 }

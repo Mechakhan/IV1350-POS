@@ -10,6 +10,12 @@ import se.kth.iv1350.pos.dto.PriceDTO;
 import se.kth.iv1350.pos.dto.SaleDTO;
 import se.kth.iv1350.pos.enumerables.DiscountType;
 
+/**
+ * Class that finds eligible discounts from
+ * a discount database.
+ * @author William
+ *
+ */
 public class DiscountSearcher {
 	
 	private DiscountDTO[] discountDatabase;

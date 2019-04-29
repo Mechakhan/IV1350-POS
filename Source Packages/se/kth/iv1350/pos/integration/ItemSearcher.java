@@ -4,6 +4,11 @@ import se.kth.iv1350.pos.dto.AmountDTO;
 import se.kth.iv1350.pos.dto.ItemDescriptionDTO;
 import se.kth.iv1350.pos.dto.ItemGroupDTO;
 
+/**
+ * Class that searches for items in the item database.
+ * @author William
+ *
+ */
 public class ItemSearcher {
 	
 	private ItemGroupDTO[] itemDatabase;

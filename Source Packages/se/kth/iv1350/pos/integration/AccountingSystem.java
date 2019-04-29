@@ -5,6 +5,11 @@ import java.util.List;
 
 import se.kth.iv1350.pos.dto.SaleDTO;
 
+/**
+ * A class were sale logs are stored for accounting.
+ * @author William
+ *
+ */
 public class AccountingSystem {
 
 	private List<SaleDTO> saleLogs;
@@ -22,5 +27,13 @@ public class AccountingSystem {
 	 */
 	public void logSale(SaleDTO saleLog) {
 		saleLogs.add(saleLog);	
+	}
+	
+	/**
+	 * Get method that retrieves the amount of sales logged in the database.
+	 * @return the amount of sales that have been logged.
+	 */
+	public int getNrOfSales() {
+		return saleLogs.size();
 	}
 }

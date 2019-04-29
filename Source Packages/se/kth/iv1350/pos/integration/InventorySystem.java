@@ -5,6 +5,12 @@ import java.util.List;
 
 import se.kth.iv1350.pos.dto.SaleDTO;
 
+/**
+ * Class that stores updates the inventory
+ * system by storing sale logs.
+ * @author William
+ *
+ */
 public class InventorySystem {
 
 	private List<SaleDTO> saleLogs;

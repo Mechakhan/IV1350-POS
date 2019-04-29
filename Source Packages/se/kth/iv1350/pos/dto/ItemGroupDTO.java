@@ -101,7 +101,7 @@ public class ItemGroupDTO {
 	
 	@Override
 	public String toString() {
-		return description + " | ID: " + identifier + " | cost: " + price + " | x" + quantity;
+		return description + " | ID: " + identifier + " | " + price + " | x" + quantity;
 	}
 	
 	@Override

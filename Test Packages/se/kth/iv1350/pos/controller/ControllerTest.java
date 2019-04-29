@@ -6,6 +6,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import se.kth.iv1350.pos.dto.MoneyDTO;
+
 class ControllerTest {
 	
 	Controller contr;
@@ -23,9 +25,9 @@ class ControllerTest {
 
 	@Test
 	void testEnteringItem() {
-		double result = contr.enterItemID("DEF456", 1).getRunningTotal().getVAT();
-		double expResult = 5.88;
-		assertEquals(expResult, result, "Incorrect sale dto returned to the view.");	
+		String result = contr.enterItemID("DEF456", 1);
+		String expResult = "5.88";
+		assertTrue(result.contains(expResult), "Incorrect sale returned to the view.");
 	}
 	
 	@Test
@@ -33,9 +35,25 @@ class ControllerTest {
 		contr.enterItemID("ABC123", 4);
 		contr.enterItemID("DEF456", 3);
 		contr.enterItemID("GHI789", 2);
-		double result = contr.enterCustomerID("1234").getPrice();
-		double expResult = (30 * 1.25 * 4 + 49 * 1.12 * 3 + 12 * 1.06 * 2 - 20) * .9;
-		assertEquals(expResult, result, "Incorrect discounted price returned to the view.");	
+		String result = contr.enterCustomerID("1234");
+		String expResult = String.valueOf((30 * 1.25 * 4 + 49 * 1.12 * 3 + 12 * 1.06 * 2 - 20) * .9);	
+		assertTrue(result.contains(expResult), "Incorrect discounted price returned to the view.");
+	}
+	
+	@Test
+	void testEndingSale() {
+		contr.enterItemID("ABC123", 4);
+		String result = contr.endSale();
+		String expResult = "VAT: 30";
+		assertTrue(result.contains(expResult), "Incorrect vat returned to the view.");
+	}
+	
+	@Test
+	void testEnterPayment() {
+		contr.enterItemID("DEF456", 3);
+		double change = Double.parseDouble(contr.enterPayment(new MoneyDTO(200)));
+		double expResult = 200 - 49 * 1.12 * 3;
+		assertEquals(expResult, change, "Incorrect change returned to the view.");
 	}
 
 }

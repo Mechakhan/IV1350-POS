@@ -1,5 +1,10 @@
 package se.kth.iv1350.pos.dto;
 
+/**
+ * A class carrying information about the store.
+ * @author William
+ *
+ */
 public class StoreDTO {
 
 	private String name;

@@ -25,10 +25,10 @@ public class ItemGroup {
 	 */
 	public void addToQuantity (int amount) {
 		if (amount < 0)
-			amount = 0; // Throw Exception instead probably...
+			amount = 0;
 		int newQuantity = itemGroup.getQuantity() + amount;
 		if (newQuantity < 0)
-			newQuantity = Integer.MAX_VALUE; // Throw Exception instead probably...
+			newQuantity = Integer.MAX_VALUE;
 		itemGroup.setQuantity(newQuantity);
 	}
 }

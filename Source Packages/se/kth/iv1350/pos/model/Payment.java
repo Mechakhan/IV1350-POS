@@ -3,6 +3,11 @@ package se.kth.iv1350.pos.model;
 import se.kth.iv1350.pos.dto.MoneyDTO;
 import se.kth.iv1350.pos.dto.PriceDTO;
 
+/**
+ * Class performaing logic related to the customer payment.
+ * @author William
+ *
+ */
 public class Payment {
 
 	private MoneyDTO payment;
@@ -24,6 +29,8 @@ public class Payment {
 	}
 	
 	public MoneyDTO calculateChange(PriceDTO price) {
-		return new MoneyDTO(payment.getAmount() - price.getPrice());
+		if (payment.getAmount() < price.getPrice())
+			return new MoneyDTO(0);
+		return new MoneyDTO (payment.getAmount() - price.getPrice());
 	}
 }

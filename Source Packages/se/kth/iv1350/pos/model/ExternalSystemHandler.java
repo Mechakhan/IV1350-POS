@@ -10,6 +10,12 @@ import se.kth.iv1350.pos.integration.InventorySystem;
 import se.kth.iv1350.pos.integration.ReceiptPrinter;
 import se.kth.iv1350.pos.integration.StoreDataRetriever;
 
+/**
+ * Class that operates different classes related 
+ * to communications with external systems.
+ * @author William
+ *
+ */
 public class ExternalSystemHandler {
 	
 	private InventorySystem inventorySys;

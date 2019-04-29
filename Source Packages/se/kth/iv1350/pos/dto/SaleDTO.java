@@ -21,12 +21,10 @@ public class SaleDTO {
 	 * @param runningTotal the current running total of all items in the Sale, including vat.
 	 * @param active indicates if the sale is active or has ended.
 	 */
-	public SaleDTO(List<ItemGroupDTO> saleItems, PriceDTO runningTotal) {
+	public SaleDTO(List<ItemGroupDTO> saleItems, PriceDTO runningTotal, int itemCount) {
 		this.saleItems = saleItems;
 		this.runningTotal = runningTotal;
-		itemCount = 0;
-		for (ItemGroupDTO itemGroup : saleItems)
-			itemCount += itemGroup.getQuantity();
+		this.itemCount = itemCount;
 	}
 	
 	/**
@@ -62,7 +60,6 @@ public class SaleDTO {
 	 */
 	public void addToSaleItems(ItemGroupDTO itemGroupToAdd) {
 		saleItems.add(itemGroupToAdd);
-		itemCount += itemGroupToAdd.getQuantity();
 	}
 	
 	/**
@@ -71,6 +68,14 @@ public class SaleDTO {
 	 */
 	public void setRunningTotal(PriceDTO runningTotal){
 		this.runningTotal = new PriceDTO(runningTotal.getPrice(), runningTotal.getVAT(), runningTotal.getActive());
+	}
+	
+	/**
+	 * Set method that updates the item count of the sale.
+	 * @param itemCount the new item count.
+	 */
+	public void setItemCount(int itemCount) {
+		this.itemCount = itemCount;
 	}
 	
 	@Override

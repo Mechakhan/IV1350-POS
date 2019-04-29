@@ -3,6 +3,11 @@ package se.kth.iv1350.pos.dto;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A class able to print the current time.
+ * @author William
+ *
+ */
 public class TimeDTO {
 	
 	private DateTimeFormatter formatter;
@@ -16,7 +21,6 @@ public class TimeDTO {
 	
 	@Override
 	public String toString() {
-		LocalDateTime currentTime = LocalDateTime.now();
-		return formatter.format(currentTime);
+		return formatter.format(LocalDateTime.now());
 	}
 }

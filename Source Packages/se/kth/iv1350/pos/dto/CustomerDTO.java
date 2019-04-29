@@ -1,5 +1,10 @@
 package se.kth.iv1350.pos.dto;
 
+/**
+ * A class representing a customer and their attributes.
+ * @author William
+ *
+ */
 public class CustomerDTO {
 	
 	private String identifier;
