@@ -1,12 +1,8 @@
 package se.kth.iv1350.pos.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import se.kth.iv1350.pos.dto.MoneyDTO;
 
 class ExternalSystemHandlerTest {
 
@@ -25,12 +21,11 @@ class ExternalSystemHandlerTest {
 		sale = null;
 	}
 
+	/**
+	 * Since the external system handler only calls methods
+	 * in classes of lower layers, the test was determined to be unnecessary.
+	 */
 	@Test
-	void test() {
-		sale.addItemGroup("DEF456", 1);
-		xsh.makeReciept(sale.getSaleLog(), new MoneyDTO(sale.getSaleLog().getRunningTotal().getPrice() + 1), new MoneyDTO(1));
-		// Måste detta testas om den enbart anropar metoder som redan testats?
-		// Isåfall, hur?
-	}
+	void test() {}
 
 }

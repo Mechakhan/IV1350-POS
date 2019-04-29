@@ -1,5 +1,7 @@
 package se.kth.iv1350.pos.model;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import se.kth.iv1350.pos.dto.MoneyDTO;
 import se.kth.iv1350.pos.dto.ReceiptDTO;
 import se.kth.iv1350.pos.dto.SaleDTO;
@@ -16,6 +18,7 @@ import se.kth.iv1350.pos.integration.StoreDataRetriever;
  * @author William
  *
  */
+@SuppressWarnings("unused")
 public class ExternalSystemHandler {
 	
 	private InventorySystem inventorySys;

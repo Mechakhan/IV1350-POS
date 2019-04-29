@@ -16,7 +16,8 @@ public class ReceiptPrinter {
 	public ReceiptPrinter() {}
 	
 	/**
-	 * Prints the given receipt.
+	 * In the real program, this method would print the given receipt.
+	 * Here, it prints it to the console instead.
 	 * @param reciept the receipt to print.
 	 */
 	public void print(ReceiptDTO reciept) {

@@ -1,12 +1,8 @@
 package se.kth.iv1350.pos.integration;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import se.kth.iv1350.pos.dto.MoneyDTO;
 
 class CashRegisterTest {
 	
@@ -23,10 +19,11 @@ class CashRegisterTest {
 		cr = null;
 	}
 
+	/**
+	 * As there is no way to retrieve the balance without
+	 * a get method, the test wasn't made.
+	 */
 	@Test
-	void testAddToBalance() {
-		cr.addToBalance(new MoneyDTO(50));
-		// Hur testa detta?
-	}
+	void test() {}
 
 }
