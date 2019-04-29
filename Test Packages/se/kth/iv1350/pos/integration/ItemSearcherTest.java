@@ -36,7 +36,7 @@ class ItemSearcherTest {
 	void testQuantity() {
 		ItemGroupDTO item = is.retrieveItemWithID("DEF456", 2);
 		int expResult = 2;
-		assertEquals(item.getQuantity(), expResult, "Item quantity does not match with input");
+		assertEquals(expResult, item.getQuantity(), "Item quantity does not match with input");
 	}
 
 }

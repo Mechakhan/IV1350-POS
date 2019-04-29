@@ -39,6 +39,7 @@ public class View {
 		
 		System.out.println(controller.enterCustomerID("1234") + "\n");
 		
-		System.out.println("-----\nChange: " + controller.enterPayment(new MoneyDTO(500)) + "\n");
+		System.out.println("-----\nChange: " + controller.enterPayment
+				(new MoneyDTO(500)) + "\n");
 	}
 }

@@ -45,7 +45,7 @@ public class Sale {
 			}
 			else
 			{
-				return "\nAttention: Item identifier was not found.";
+				return "\nAttention: Item identifier was not found.\n";
 			}
 		}
 		return getSaleLog().toString();
