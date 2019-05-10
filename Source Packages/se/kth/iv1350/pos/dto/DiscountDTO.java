@@ -23,13 +23,11 @@ public class DiscountDTO {
 	 * @param reduceModifier the modifier that the price can be multiplied by.
 	 */
 	public DiscountDTO (DiscountType type, DiscountConditionDTO conditions, double reduceConstant, double reduceModifier) {
+		if (reduceConstant < 0 || reduceModifier <= 0 || reduceModifier > 1)
+			throw new IllegalArgumentException("The price reducement was too small or too large.");
 		this.type = type;
 		this.conditions = new DiscountConditionDTO (conditions);
-		if (reduceConstant < 0)
-			reduceConstant = 0;
 		this.reduceConstant = reduceConstant;
-		if (reduceModifier <= 0 || reduceModifier > 1)
-			reduceModifier = 1;
 		this.reduceModifier = reduceModifier;	
 	}
 

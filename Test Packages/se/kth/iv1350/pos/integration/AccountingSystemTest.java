@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import se.kth.iv1350.pos.model.InvalidItemException;
 import se.kth.iv1350.pos.model.Sale;
 
 class AccountingSystemTest {
@@ -26,7 +27,7 @@ class AccountingSystemTest {
 	}
 
 	@Test
-	void testLoggingSale() {
+	void testLoggingSale() throws InvalidItemException {
 		sale.addItemGroup("ABC123", 2);
 		as.logSale(sale.getSaleLog());
 		int amount = as.getNrOfSales();

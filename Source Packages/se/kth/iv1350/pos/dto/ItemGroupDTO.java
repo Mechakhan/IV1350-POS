@@ -23,12 +23,11 @@ public class ItemGroupDTO {
 	 * @param description the description of the item(s).
 	 */
 	public ItemGroupDTO (String identifier, AmountDTO price, int quantity, ItemDescriptionDTO description) {
+		if (quantity < 0)
+			throw new IllegalArgumentException("The item quantity can not be negative.");
 		this.identifier = identifier;
 		this.price = price;
-		if (quantity >= 0)
-			this.quantity = quantity;
-		else
-			this.quantity = 0;
+		this.quantity = quantity;
 		this.description = description;
 	}
 	

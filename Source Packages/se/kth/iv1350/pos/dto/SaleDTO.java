@@ -22,6 +22,8 @@ public class SaleDTO {
 	 * @param active indicates if the sale is active or has ended.
 	 */
 	public SaleDTO(List<ItemGroupDTO> saleItems, PriceDTO runningTotal, int itemCount) {
+		if (itemCount < 0)
+			throw new IllegalArgumentException("The item count can not be negative.");
 		this.saleItems = saleItems;
 		this.runningTotal = runningTotal;
 		this.itemCount = itemCount;

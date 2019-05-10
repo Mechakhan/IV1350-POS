@@ -4,8 +4,10 @@ import se.kth.iv1350.pos.dto.CustomerDTO;
 import se.kth.iv1350.pos.dto.MoneyDTO;
 import se.kth.iv1350.pos.dto.SaleDTO;
 import se.kth.iv1350.pos.integration.CashRegister;
+import se.kth.iv1350.pos.integration.DatabaseFailureException;
 import se.kth.iv1350.pos.model.DiscountHandler;
 import se.kth.iv1350.pos.model.ExternalSystemHandler;
+import se.kth.iv1350.pos.model.InvalidItemException;
 import se.kth.iv1350.pos.model.Payment;
 import se.kth.iv1350.pos.model.Sale;
 
@@ -42,9 +44,18 @@ public class Controller {
 	 * @param identifier the identifier of the entered item(s).
 	 * @param quantity the quantity of the entered item(s).
 	 * @return A SaleDTO object based on information about the current Sale is returned.
+	 * @throws InvalidItemException received from the model layer if the item identifier was invalid.
+	 * @throws OperationFailedException thrown if a database error occured.
 	 */
-	public String enterItemID (String identifier, int quantity) {
-		return sale.addItemGroup (identifier, quantity);
+	public String enterItemID (String identifier, int quantity) throws InvalidItemException {
+		if (quantity < 1)
+			throw new IllegalArgumentException("The quantity of the entered item was too small.");
+		try {
+			return sale.addItemGroup (identifier, quantity);
+		}
+		catch (DatabaseFailureException e) {
+			throw new OperationFailedException("Could not access the item inventory.", e);
+		}
 	}
 	
 	/**
@@ -60,9 +71,15 @@ public class Controller {
 	 * 
 	 * @param identifier the identifier of the customer
 	 * @return the new running total after discounts have been applied.
+	 * @throws DatabaseFailureException thrown if a database error occured.
 	 */
 	public String enterCustomerID (String identifier) {
-		return new DiscountHandler().findDiscount(new CustomerDTO(identifier), sale).toString();		
+		try {
+			return new DiscountHandler().findDiscount(new CustomerDTO(identifier), sale).toString();
+		}
+		catch (DatabaseFailureException e) {
+			throw new OperationFailedException("Could not access the discounts.", e);
+		}
 	}
 	
 	/**

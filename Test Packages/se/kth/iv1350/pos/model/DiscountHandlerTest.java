@@ -26,7 +26,7 @@ class DiscountHandlerTest {
 	}
 
 	@Test
-	void testNoDiscount() {
+	void testNoDiscount() throws InvalidItemException {
 		sale.addItemGroup("ABC123", 10);
 		sale.addItemGroup("DEF456", 1);
 		double newPrice = dh.findDiscount(new CustomerDTO("0123"), sale).getPrice();
@@ -35,7 +35,7 @@ class DiscountHandlerTest {
 	}
 	
 	@Test
-	void testOneDiscount() {
+	void testOneDiscount() throws InvalidItemException {
 		sale.addItemGroup("ABC123", 5);
 		sale.addItemGroup("GHI789", 3);
 		double newPrice = dh.findDiscount(new CustomerDTO("1234"), sale).getPrice();
@@ -44,7 +44,7 @@ class DiscountHandlerTest {
 	}
 	
 	@Test
-	void testThreeDiscount() {
+	void testThreeDiscount() throws InvalidItemException {
 		sale.addItemGroup("DEF456", 10);
 		double newPrice = dh.findDiscount(new CustomerDTO("1234"), sale).getPrice();
 		double expResult = (49 * 1.12 * 10 - 20) * .9 * .8;

@@ -25,8 +25,11 @@ public class ItemSearcher {
 	 * @param identifier the identifier to look for
 	 * @param quantity the quantity to of the item group to return if it was found.
 	 * @return the item found in the item database <code>null</code> if no items were found.
+	 * @throws DatabaseFailureException 
 	 */
 	public ItemGroupDTO retrieveItemWithID (String identifierLookedFor, int quantity) {
+		if (identifierLookedFor.equals("dbfailure"))
+			throw new DatabaseFailureException("There was a database failure.");
 		for (ItemGroupDTO databaseItem : itemDatabase) {
 			if (databaseItem.getIdentifier().equals(identifierLookedFor))
 				return new ItemGroupDTO(databaseItem, quantity);

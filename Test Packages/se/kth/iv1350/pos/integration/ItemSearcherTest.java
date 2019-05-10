@@ -27,6 +27,14 @@ class ItemSearcherTest {
 	}
 	
 	@Test
+	void testDatabaseFail() {
+		try {
+			is.retrieveItemWithID("dbfailure", 0);
+			fail("Database failure exception not thrown.");
+		} catch (Throwable e) {}
+	}
+	
+	@Test
 	void testDatabaseFindNoItem() {
 		ItemGroupDTO item = is.retrieveItemWithID("ABC122", 0);
 		assertNull(item, "Found item not in database");

@@ -24,20 +24,21 @@ class SaleTest {
 
 	@Test
 	void testAddNewInvalidItem() {
-		String result = sale.addItemGroup("GHI780", 4);
-		String expResult = "Attention:";
-		assertTrue(result.contains(expResult), "Invalid item is added to sale items.");
+		try {
+			sale.addItemGroup("GHI780", 4);
+			fail("Invalid item ID was treated as valid");
+		} catch (InvalidItemException e) {}
 	}
 	
 	@Test
-	void testAddNewValidItem() {
+	void testAddNewValidItem() throws InvalidItemException {
 		String result = sale.addItemGroup("GHI789", 4);
 		String expResult = "cost: 12.0";
 		assertTrue(result.contains(expResult), "Item not added correctly into List.");
 	}
 	
 	@Test
-	void testAddExistingItem() {
+	void testAddExistingItem() throws InvalidItemException {
 		sale.addItemGroup("ABC123", 2);
 		String result = sale.addItemGroup("ABC123", 4);
 		String expResult = "x6";

@@ -34,8 +34,9 @@ public class Sale {
 	 * @param identifier the identifier of the entered item(s).
 	 * @param quantity the quantity of the entered item(s).
 	 * @return A SaleDTO object based on information about the current Sale is returned.
+	 * @throws InvalidItemException thrown when an item was not found.
 	 */
-	public String addItemGroup (String identifier, int quantity) {
+	public String addItemGroup (String identifier, int quantity) throws InvalidItemException {
 		if (!idInList(identifier, quantity)) {
 			ItemGroupDTO foundItemGroup = new ItemSearcher().retrieveItemWithID(identifier, quantity);
 			if (foundItemGroup != null) {
@@ -45,22 +46,21 @@ public class Sale {
 			}
 			else
 			{
-				return "\nAttention: Item identifier was not found.\n";
+				throw new InvalidItemException(identifier);
 			}
 		}
 		return getSaleLog().toString();
 	}
 	
 	private boolean idInList (String identifierLookedFor, int quantity) {
-		boolean idWasFound = false;
 		List<ItemGroupDTO> saleItems = saleLog.getSaleItems();
 		for (ItemGroupDTO itemGroup : saleItems) {
 			if (itemGroup.getIdentifier().equals(identifierLookedFor)) {
 				addExistingItemToSale(itemGroup, quantity);
-				idWasFound = true;
+				return true;
 			}
 		}
-		return idWasFound;
+		return false;
 	}
 	
 	private void addExistingItemToSale(ItemGroupDTO itemGroup, int quantityToAdd) {

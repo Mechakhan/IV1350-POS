@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import se.kth.iv1350.pos.dto.MoneyDTO;
+import se.kth.iv1350.pos.model.InvalidItemException;
 
 class ControllerTest {
 	
@@ -24,14 +25,14 @@ class ControllerTest {
 	}
 
 	@Test
-	void testEnteringItem() {
+	void testEnteringItem() throws InvalidItemException {
 		String result = contr.enterItemID("DEF456", 1);
 		String expResult = "5.88";
 		assertTrue(result.contains(expResult), "Incorrect sale returned to the view.");
 	}
 	
 	@Test
-	void testEnteringCustomer() {
+	void testEnteringCustomer() throws InvalidItemException {
 		contr.enterItemID("ABC123", 4);
 		contr.enterItemID("DEF456", 3);
 		contr.enterItemID("GHI789", 2);
@@ -41,7 +42,7 @@ class ControllerTest {
 	}
 	
 	@Test
-	void testEndingSale() {
+	void testEndingSale() throws InvalidItemException {
 		contr.enterItemID("ABC123", 4);
 		String result = contr.endSale();
 		String expResult = "VAT: 30";
@@ -49,11 +50,28 @@ class ControllerTest {
 	}
 	
 	@Test
-	void testEnterPayment() {
+	void testEnterPayment() throws InvalidItemException {
 		contr.enterItemID("DEF456", 3);
 		double change = Double.parseDouble(contr.enterPayment(new MoneyDTO(200)));
 		double expResult = 200 - 49 * 1.12 * 3;
 		assertEquals(expResult, change, "Incorrect change returned to the view.");
+	}
+	
+	@Test
+	void testEnterInvalidQuantity() throws InvalidItemException {
+		try {
+			contr.enterItemID("DEF456", 0);
+			fail("Exception was not thrown with invalid item quantity.");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testEnterInvalidPayment() throws InvalidItemException {
+		contr.enterItemID("DEF456", 1);
+		try {
+			contr.enterPayment(new MoneyDTO(0));
+			fail("Exception was not thrown with too small payment.");
+		} catch (IllegalArgumentException e) {}
 	}
 
 }

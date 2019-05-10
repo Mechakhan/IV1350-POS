@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import se.kth.iv1350.pos.dto.MoneyDTO;
 import se.kth.iv1350.pos.dto.ReceiptDTO;
 import se.kth.iv1350.pos.dto.TimeDTO;
+import se.kth.iv1350.pos.model.InvalidItemException;
 import se.kth.iv1350.pos.model.Sale;
 
 class ReceiptPrinterTest {
@@ -40,7 +41,7 @@ class ReceiptPrinterTest {
 	}
 
 	@Test
-	void test() {
+	void test() throws InvalidItemException {
 		sale.addItemGroup("GHI789", 3);
 		rp.print(new ReceiptDTO(new StoreDataRetriever().getStoreData(), new TimeDTO(), sale.getSaleLog(), 
 				new MoneyDTO(sale.getSaleLog().getRunningTotal().getPrice()), new MoneyDTO(0)));

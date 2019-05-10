@@ -23,6 +23,7 @@ public class DiscountHandler {
 	 * @param customer the customer to possibly receive a discount
 	 * @param sale the sale containing the items the customer has bought
 	 * @return the new running total after discounts have been applied.
+	 * @throws DatabaseFailureException thrown when the database fails.
 	 */
 	public PriceDTO findDiscount (CustomerDTO customer, Sale sale) {
 		DiscountDTO[] eligibleDiscounts = new DiscountSearcher().getEligibleDiscounts(customer, sale.getSaleLog());

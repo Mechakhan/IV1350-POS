@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import se.kth.iv1350.pos.dto.CustomerDTO;
+import se.kth.iv1350.pos.model.InvalidItemException;
 import se.kth.iv1350.pos.model.Sale;
 
 class DiscountSearcherTest {
@@ -27,7 +28,7 @@ class DiscountSearcherTest {
 	}
 
 	@Test
-	void testInvalidCustomerID() {
+	void testInvalidCustomerID() throws InvalidItemException {
 		sale.addItemGroup("ABC123", 6);
 		int amountOfDiscounts = ds.getEligibleDiscounts(new CustomerDTO("0123"), sale.getSaleLog()).length;
 		int expResult = 0;
@@ -35,7 +36,16 @@ class DiscountSearcherTest {
 	}
 	
 	@Test
-	void testInvalidItemCount() {
+	void testDatabaseFail() throws InvalidItemException {
+		sale.addItemGroup("ABC123", 6);
+		try {
+			ds.getEligibleDiscounts(new CustomerDTO("dbfailure"), sale.getSaleLog());
+			fail("Database failure exception not thrown.");
+		} catch (Throwable e) {}
+	}
+	
+	@Test
+	void testInvalidItemCount() throws InvalidItemException {
 		sale.addItemGroup("ABC123", 3);
 		int amountOfDiscounts = ds.getEligibleDiscounts(new CustomerDTO("1234"), sale.getSaleLog()).length;
 		int expResult = 0;
@@ -43,7 +53,7 @@ class DiscountSearcherTest {
 	}
 	
 	@Test
-	void testInvalidSalePrice() {
+	void testInvalidSalePrice() throws InvalidItemException {
 		sale.addItemGroup("GHI789", 5);
 		int amountOfDiscounts = ds.getEligibleDiscounts(new CustomerDTO("1234"), sale.getSaleLog()).length;
 		int expResult = 0;
@@ -51,7 +61,7 @@ class DiscountSearcherTest {
 	}
 	
 	@Test
-	void testValidForOneDiscount() {
+	void testValidForOneDiscount() throws InvalidItemException {
 		sale.addItemGroup("ABC123", 1);
 		sale.addItemGroup("DEF456", 1);
 		sale.addItemGroup("GHI789", 8);
@@ -61,7 +71,7 @@ class DiscountSearcherTest {
 	}
 	
 	@Test
-	void testValidForTwoDiscounts() {
+	void testValidForTwoDiscounts() throws InvalidItemException {
 		sale.addItemGroup("ABC123", 3);
 		sale.addItemGroup("DEF456", 6);
 		int amountOfDiscounts = ds.getEligibleDiscounts(new CustomerDTO("1234"), sale.getSaleLog()).length;

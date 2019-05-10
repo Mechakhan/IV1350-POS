@@ -39,8 +39,10 @@ class PaymentTest {
 	
 	@Test
 	void testCalculateChangeLargerPrice() {
-		double change = payment.calculateChange(new PriceDTO(200, 0, false)).getAmount();
-		double expResult = 0;
-		assertEquals(expResult, change, "Wrong change is returned with too big input.");
+		try {
+			payment.calculateChange(new PriceDTO(200, 0, false));
+			fail("change is returned with too big input.");
+		}
+		catch (Exception e) {}
 	}
 }

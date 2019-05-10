@@ -30,7 +30,7 @@ public class Payment {
 	
 	public MoneyDTO calculateChange(PriceDTO price) {
 		if (payment.getAmount() < price.getPrice())
-			return new MoneyDTO(0);
+			throw new IllegalArgumentException("The payment was not sufficient to cover the total price.");
 		return new MoneyDTO (payment.getAmount() - price.getPrice());
 	}
 }

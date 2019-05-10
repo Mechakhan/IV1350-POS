@@ -26,7 +26,6 @@ public class CashRegister {
 	 * @param payment the payment to add
 	 */
 	public void addToBalance (MoneyDTO payment) {
-		if (payment.getAmount() >= 0)
 			balance += payment.getAmount();
 	}
 }

@@ -39,8 +39,11 @@ public class DiscountSearcher {
 	 * @param customer the customer to possibly receive a discount
 	 * @param sale the sale containing the items the customer has bought
 	 * @return the array of applicable discounts to be applies to the total price
+	 * @throws DatabaseFailureException 
 	 */
 	public DiscountDTO[] getEligibleDiscounts(CustomerDTO customer, SaleDTO saleDTO) {
+		if (customer.getIdentifier().equals("dbfailure"))
+			throw new DatabaseFailureException("There was a database failure.");
 		List<DiscountDTO> eligibleDiscounts = new ArrayList<DiscountDTO>();
 		for (DiscountDTO discount : discountDatabase) {
 			if (eligibleDiscount(discount, customer, saleDTO))

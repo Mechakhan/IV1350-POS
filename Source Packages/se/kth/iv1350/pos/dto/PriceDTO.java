@@ -26,14 +26,10 @@ public class PriceDTO {
 	 * @param vat represents the VAT rate of the amount.
 	 */
 	public PriceDTO (double price, double vat, boolean active) {
-		if (price >= 0)
-			this.price = price;
-		else
-			this.price = 0;
-		if (vat >= 0)
-			this.vat = vat;
-		else
-			this.vat = 0;
+		if (price < 0 || vat < 0)
+			throw new IllegalArgumentException("The price or VAT can not be negative.");
+		this.price = price;
+		this.vat = vat;
 		this.active = active;
 	}
 

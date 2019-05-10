@@ -37,10 +37,11 @@ class ItemGroupTest {
 	
 	@Test
 	void testAddingNegativeItemQuantity() {
-		itemGroup.addToQuantity(-1);
-		int qnty = itemDTO.getQuantity();
-		int expResult = 3;
-		assertEquals(qnty, expResult, "Negative item quantities are not excluded.");
+		try {
+			itemGroup.addToQuantity(-1);
+			fail("Negative value was added to an item group's quantity.");
+		}
+		catch (Exception e) {}
 	}
 	
 	@Test

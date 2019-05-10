@@ -15,7 +15,7 @@ public class MoneyDTO {
 	 */
 	public MoneyDTO(double amount) {
 		if (amount < 0)
-			amount = 0;
+			throw new IllegalArgumentException("The money amount can not be negative.");
 		this.amount = amount;
 	}
 	

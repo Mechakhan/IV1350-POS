@@ -25,7 +25,7 @@ public class ItemGroup {
 	 */
 	public void addToQuantity (int amount) {
 		if (amount < 0)
-			amount = 0;
+			throw new IllegalArgumentException("Attempted to add negative value to quantity.");
 		int newQuantity = itemGroup.getQuantity() + amount;
 		if (newQuantity < 0)
 			newQuantity = Integer.MAX_VALUE;
