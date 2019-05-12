@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import se.kth.iv1350.pos.controller.Controller;
+import se.kth.iv1350.pos.integration.CashRegister;
 
 class ViewTest {
 	
@@ -17,7 +18,7 @@ class ViewTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		Controller contr = new Controller();
+		Controller contr = new Controller(CashRegister.getRegister());
 		instance = new View(contr);
 		
 		printOut = new ByteArrayOutputStream();

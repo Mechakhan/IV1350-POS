@@ -1,6 +1,8 @@
 package se.kth.iv1350.pos.startup;
 
 import se.kth.iv1350.pos.controller.Controller;
+import se.kth.iv1350.pos.integration.CashRegister;
+import se.kth.iv1350.pos.view.TotalRevenueView;
 import se.kth.iv1350.pos.view.View;
 
 /**
@@ -10,12 +12,14 @@ import se.kth.iv1350.pos.view.View;
  */
 public class Main {
 	/**
-	 * The main method run at startup
+	 * The main method to run at startup
 	 * 
 	 * @param args The application does not take any command
 	 * line parameters.
 	 */
 	public static void main(String[] args) {
-		new View(new Controller()).sampleInput();
+		CashRegister register = CashRegister.getRegister();
+		register.addObserver(new TotalRevenueView());
+		new View(new Controller(register)).sampleInput();
 	}
 }

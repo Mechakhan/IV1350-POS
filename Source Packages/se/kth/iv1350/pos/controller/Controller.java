@@ -2,6 +2,7 @@ package se.kth.iv1350.pos.controller;
 
 import se.kth.iv1350.pos.dto.CustomerDTO;
 import se.kth.iv1350.pos.dto.MoneyDTO;
+import se.kth.iv1350.pos.dto.PriceDTO;
 import se.kth.iv1350.pos.dto.SaleDTO;
 import se.kth.iv1350.pos.integration.CashRegister;
 import se.kth.iv1350.pos.integration.DatabaseFailureException;
@@ -21,14 +22,14 @@ public class Controller {
 	
 	private Sale sale;
 	private ExternalSystemHandler externalSysHandler;
-	private CashRegister cashRegister;
+	private CashRegister register;
 	
 	/**
 	 * Creates new instance.
 	 */
-	public Controller () {
+	public Controller (CashRegister register) {
 		externalSysHandler = new ExternalSystemHandler();
-		cashRegister = new CashRegister();
+		this.register = register;
 	}
 	
 	/**
@@ -47,7 +48,7 @@ public class Controller {
 	 * @throws InvalidItemException received from the model layer if the item identifier was invalid.
 	 * @throws OperationFailedException thrown if a database error occured.
 	 */
-	public String enterItemID (String identifier, int quantity) throws InvalidItemException {
+	public SaleDTO enterItemID (String identifier, int quantity) throws InvalidItemException {
 		if (quantity < 1)
 			throw new IllegalArgumentException("The quantity of the entered item was too small.");
 		try {
@@ -62,8 +63,8 @@ public class Controller {
 	 * Method called when all items have been entered.
 	 * @return the total price, including VAT.
 	 */
-	public String endSale() {
-		return sale.end().toString();
+	public PriceDTO endSale() {
+		return sale.end();
 	}
 	
 	/**
@@ -73,9 +74,9 @@ public class Controller {
 	 * @return the new running total after discounts have been applied.
 	 * @throws DatabaseFailureException thrown if a database error occured.
 	 */
-	public String enterCustomerID (String identifier) {
+	public PriceDTO enterCustomerID (String identifier) {
 		try {
-			return new DiscountHandler().findDiscount(new CustomerDTO(identifier), sale).toString();
+			return new DiscountHandler().findDiscount(new CustomerDTO(identifier), sale);
 		}
 		catch (DatabaseFailureException e) {
 			throw new OperationFailedException("Could not access the discounts.", e);
@@ -87,11 +88,11 @@ public class Controller {
 	 * @param payment the amount of money the customer paid.
 	 * @return the change to be given to the customer.
 	 */
-	public String enterPayment(MoneyDTO payment) {
+	public MoneyDTO enterPayment(MoneyDTO payment) {
 		SaleDTO saleLog = sale.getSaleLog();
 		MoneyDTO change = new Payment(payment).calculateChange(saleLog.getRunningTotal());
-		cashRegister.addToBalance(new MoneyDTO(payment.getAmount() - change.getAmount()));
+		register.addToBalance(new MoneyDTO(payment.getAmount() - change.getAmount()));
 		externalSysHandler.makeReciept(saleLog, payment, change);
-		return change.toString();
+		return change;
 	}
 }

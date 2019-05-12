@@ -10,7 +10,7 @@ class CashRegisterTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		cr = new CashRegister();
+		cr = CashRegister.getRegister();
 		
 	}
 

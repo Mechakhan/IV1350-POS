@@ -32,7 +32,7 @@ class SaleTest {
 	
 	@Test
 	void testAddNewValidItem() throws InvalidItemException {
-		String result = sale.addItemGroup("GHI789", 4);
+		String result = sale.addItemGroup("GHI789", 4).toString();
 		String expResult = "cost: 12.0";
 		assertTrue(result.contains(expResult), "Item not added correctly into List.");
 	}
@@ -40,7 +40,7 @@ class SaleTest {
 	@Test
 	void testAddExistingItem() throws InvalidItemException {
 		sale.addItemGroup("ABC123", 2);
-		String result = sale.addItemGroup("ABC123", 4);
+		String result = sale.addItemGroup("ABC123", 4).toString();
 		String expResult = "x6";
 		assertTrue(result.contains(expResult), "Item not added correctly into List.");
 	}

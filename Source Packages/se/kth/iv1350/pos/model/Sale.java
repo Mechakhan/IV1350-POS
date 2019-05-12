@@ -36,7 +36,7 @@ public class Sale {
 	 * @return A SaleDTO object based on information about the current Sale is returned.
 	 * @throws InvalidItemException thrown when an item was not found.
 	 */
-	public String addItemGroup (String identifier, int quantity) throws InvalidItemException {
+	public SaleDTO addItemGroup (String identifier, int quantity) throws InvalidItemException {
 		if (!idInList(identifier, quantity)) {
 			ItemGroupDTO foundItemGroup = new ItemSearcher().retrieveItemWithID(identifier, quantity);
 			if (foundItemGroup != null) {
@@ -49,7 +49,7 @@ public class Sale {
 				throw new InvalidItemException(identifier);
 			}
 		}
-		return getSaleLog().toString();
+		return getSaleLog();
 	}
 	
 	private boolean idInList (String identifierLookedFor, int quantity) {

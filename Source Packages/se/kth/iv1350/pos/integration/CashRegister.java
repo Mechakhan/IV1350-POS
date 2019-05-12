@@ -2,6 +2,9 @@ package se.kth.iv1350.pos.integration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import se.kth.iv1350.pos.dto.MoneyDTO;
 
 /**
@@ -12,13 +15,16 @@ import se.kth.iv1350.pos.dto.MoneyDTO;
 @SuppressWarnings("unused")
 public class CashRegister {
 
-	private double balance;
+	private static CashRegister CASH_REGISTER = new CashRegister();
+	private MoneyDTO balance;
+	private List<CashRegisterObserver> observers = new ArrayList<CashRegisterObserver>();
 	
 	/**
-	 * Creates instance and initializes the balance to to the amount of cash in the register.
+	 * Creates new instance and initializes the balance to to the amount of cash in the register.
+	 * Can only be called from within this singleton class.
 	 */
-	public CashRegister() {
-		balance = 1000;
+	private CashRegister() {
+		balance = new MoneyDTO(1000);
 	}
 	
 	/**
@@ -26,6 +32,28 @@ public class CashRegister {
 	 * @param payment the payment to add
 	 */
 	public void addToBalance (MoneyDTO payment) {
-			balance += payment.getAmount();
+		balance = new MoneyDTO(payment.getAmount() + balance.getAmount());
+		notifyObservers(payment);
+	}
+	
+	private void notifyObservers(MoneyDTO payment) {
+		for (CashRegisterObserver obs : observers) {
+			obs.addToTotalRevenue(payment);
+		}
+	}
+	
+	/**
+	 * Adds an observer of this class to the list of observers.
+	 * @param obs the observer to add.
+	 */
+	public void addObserver(CashRegisterObserver obs) {
+		observers.add(obs);
+	}
+	
+	/**
+	 * @return the only instance of this singleton.
+	 */
+	public static CashRegister getRegister() {
+		return CASH_REGISTER;
 	}
 }
