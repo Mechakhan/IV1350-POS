@@ -55,7 +55,7 @@ public class Controller {
 			return sale.addItemGroup (identifier, quantity);
 		}
 		catch (DatabaseFailureException e) {
-			throw new OperationFailedException("Could not access the item inventory.", e);
+			throw new OperationFailedException("Could not access the item inventory. Please try again.", e);
 		}
 	}
 	
@@ -79,7 +79,7 @@ public class Controller {
 			return new DiscountHandler().findDiscount(new CustomerDTO(identifier), sale);
 		}
 		catch (DatabaseFailureException e) {
-			throw new OperationFailedException("Could not access the discounts.", e);
+			throw new OperationFailedException("Could not access the discounts. Please try again.", e);
 		}
 	}
 	

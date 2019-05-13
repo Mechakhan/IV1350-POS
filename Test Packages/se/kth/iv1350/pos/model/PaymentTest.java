@@ -32,9 +32,11 @@ class PaymentTest {
 	
 	@Test
 	void testCalculateChangeInvalidPrice() {
-		double change = payment.calculateChange(new PriceDTO(-10, 0, false)).getAmount();
-		double expResult = 100;
-		assertEquals(expResult, change, "Wrong change is returned with invalid input.");
+		try {
+			payment.calculateChange(new PriceDTO(-10, 0, false));
+			fail("Change is returned with invalid negative input.");
+		}
+		catch (Exception e) {}
 	}
 	
 	@Test

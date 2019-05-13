@@ -19,6 +19,6 @@ public class TotalRevenueView implements CashRegisterObserver {
 	@Override
 	public void addToTotalRevenue(MoneyDTO payment) {
 		totalRevenue = new MoneyDTO(totalRevenue.getAmount() + payment.getAmount());
-		System.out.println("--Total revenue view--\n" + totalRevenue);
+		System.out.println("--Total revenue view--\n" + totalRevenue + "\n");
 	}
 }

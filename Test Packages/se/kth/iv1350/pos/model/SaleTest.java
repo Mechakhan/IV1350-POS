@@ -55,10 +55,11 @@ class SaleTest {
 	
 	@Test
 	void testAddToRunningTotalInvalid() {
-		sale.setRunningTotal(new PriceDTO(-10, 0, false));
-		double runningTotal = sale.getSaleLog().getRunningTotal().getPrice();
-		double expResult = 0;
-		assertEquals(expResult, runningTotal, "Running total not updated correctly by set method.");
+		try {
+			sale.setRunningTotal(new PriceDTO(-10, 0, false));
+			fail("Running total not updated correctly by negative value.");
+		}
+		catch (Exception e) {}
 	}
 	
 	@Test

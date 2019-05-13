@@ -51,21 +51,24 @@ public class View {
 		}
 		try {
 			System.out.println(controller.enterItemID("ÅÄÖ123", 3) + "\n");
-		} catch (InvalidItemException | IllegalArgumentException e) {
+		} catch (Exception e) {
 			handleException(e);
 		}
 		try {
 			System.out.println(controller.enterItemID("ABC123", 3) + "\n");
-		} catch (InvalidItemException | IllegalArgumentException e) {
+		} catch (Exception e) {
 			handleException(e);
 		}
-		/*try {
+		try {
 			System.out.println(controller.enterItemID("dbfailure", 3) + "\n");
-		} catch (InvalidItemException | IllegalArgumentException e) {
+		} catch (Exception e) {
 			handleException(e);
-		}*/
+		}
 		
 		// Ska man fånga en runtime exception för att logga den?
+		// Kan databasen i discountsearcher lagra objekt av 
+		// implementationer av discount interfacet från model lagret?
+		// Lägga in bilder på all källkod som ändrades när den finns tillgänglig på github?
 		
 		System.out.println(controller.endSale() + "\n");
 		
